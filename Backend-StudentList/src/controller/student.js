@@ -1,4 +1,4 @@
-const { findById } = require("../model/student");
+
 const studentModel = require("../model/student");
 
 module.exports = {
@@ -18,9 +18,7 @@ module.exports = {
           { $inc: { marks: marks } },
           { new: true }
         );
-        return res
-          .status(201)
-          .send({ status: true, msg: "Success", data: updateRecord });
+        return res.status(201).send({ status: true, msg: "Success", data: updateRecord });
       }
       let addstudent = await studentModel.create({ ...req.body, user: userId });
       res.status(201).send({ status: true, msg: "Success", data: addstudent });
@@ -74,11 +72,11 @@ module.exports = {
               .status(200)
               .send({ status: true, msg: "Success", data: alreadyPresent });
           }
-        }else{
-            let isDuplicate = await studentModel.findOne({user: userId, name, subject})
-            if(isDuplicate) {
-                return res.status(400).send({status: false, msg: "Student and Subject combination already Exists."})
-            }
+        } else {
+          let isDuplicate = await studentModel.findOne({ user: userId, name, subject })
+          if (isDuplicate) {
+            return res.status(400).send({ status: false, msg: "Student and Subject combination already Exists." })
+          }
         }
       }
       let updateDetail = await studentModel.findOneAndUpdate(

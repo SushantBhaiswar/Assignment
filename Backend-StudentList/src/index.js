@@ -8,16 +8,16 @@ app.use(express.json());
 mongoose.set('strictQuery', true);
 mongoose
   .connect(
-    "mongodb+srv://sonal-plutonium:5dJokPsnG43EGYHE@cluster0.koc4qx2.mongodb.net/Student-List",
+    "mongodb+srv://Sushant_Bhaiswar_30:WBYUu1bCYmxmZUmg@cluster0.jui41on.mongodb.net/Student-list?retryWrites=true&w=majority",
     {
       useNewUrlParser: true,
     }
   )
-  .then(() => console.log("MongoDB is connected"))
+  .then((data) => console.log("MongoDB is connected" + data.connection.host))
   .catch((err) => console.log(err));
 
 app.use("/", route);
 
-app.listen(process.env.PORT || 3000, function () {
-  console.log("Express app running on port " + (process.env.PORT || 3000));
+app.listen(3000, () => {
+  console.log("Express app running on port " + 3000);
 });
