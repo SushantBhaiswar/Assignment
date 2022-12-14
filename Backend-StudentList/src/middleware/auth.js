@@ -1,7 +1,5 @@
 let studentModel = require("../model/student");
-let useerModel = require("../model/user");
 let jwt = require("jsonwebtoken");
-const { findById } = require("../model/student");
 
 module.exports = {
   authentication: (req, res, next) => {
@@ -11,7 +9,9 @@ module.exports = {
         return res
           .status(401)
           .send({ status: false, message: "User not LoggedIn" });
-      token = token.replace(/^Bearer\s+/, "");
+        
+          token = token.replace("Bearer ", "");
+         
       jwt.verify(token, "This-is-a-secret-key", (err, decoded) => {
         if (err)
           return res.status(400).send({ status: false, msg: "Invalid token" });
