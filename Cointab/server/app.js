@@ -18,6 +18,12 @@ app.use(cors())
 app.use(express.json())
 app.use("/", Router)
 
+
+app.use(express.static(path.join(__dirname, "./client/build")));
+
+app.get("*", function (req, res) {
+    res.sendFile(path.join(__dirname, "./client/build/index.html"));
+});
 app.listen(3001, () => {
     console.log("Express app is running on port 3001");
 })
